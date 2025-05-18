@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Your Notes</h4>
+            </div>
+            <div class="card-body" id="notes-list">
+                <div class="text-center" id="loading-spinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (async () => {
+        try {
+            const response = await fetch('/api/notes');
+            const data = await response.json();
+
+            const notesList = document.getElementById('notes-list');
+            notesList.innerHTML = '';
+
+            data.notes.forEach(note => {
+                const noteElement = document.createElement('a');
+                noteElement.href = `/note/${note.id}/long`;
+                noteElement.className = 'card mb-3 note-card text-decoration-none text-dark';
+                noteElement.innerHTML = `
+                    <div class="card-body d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="card-title">${note.title}</h5>
+                            <p class="card-text text-muted">${note.content.substring(0, 50)}...</p>
+                        </div>
+                        <div>
+                            <a href="/note/${note.id}/short" class="btn btn-primary btn-sm me-2">View short version</a>
+                            <button onclick="event.preventDefault(); deleteNote('${note.id}')" class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+                notesList.appendChild(noteElement);
+            });
+
+        } catch (error) {
+            alert('Failed to load notes');
+        } finally {
+            document.getElementById('loading-spinner').remove();
+        }
+    })();
+</script>
+
+<script>
+    async function deleteNote(id) {
+        try {
+            const response = await fetch(`/api/note/${id}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Failed to delete note');
+            }
+        } catch (error) {
+            alert('Error deleting note');
+        }
+    }
+</script>
+{% endblock %}

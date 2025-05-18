@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white">
+                <h2 class="mb-0">{{ note.title | safe }}</h2>
+                <small>Written by {{ username | safe }}</small>
+            </div>
+            <div class="card-body"></div>
+                <div class="mb-3" style="white-space: pre-wrap; font-size: 1.1rem;">
+                    {{ note.content | safe }}
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-danger" onclick="deleteNote({{ note.id | safe }})">Delete Note</button>
+                    <a href="/" class="btn btn-secondary">Back to Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Same delete function as in short view
+    async function deleteNote(noteId) {
+        if (confirm('Are you sure you want to delete this note?')) {
+            try {
+                const response = await fetch(`/api/note/${noteId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    window.location.href = '/';
+                } else {
+                    alert('Failed to delete note');
+                }
+            } catch (error) {
+                alert('Network error - please try again');
+            }
+        }
+    }
+</script>
+{% endblock %}
