@@ -4,3 +4,6 @@
 [submodule "mini_course_2025/session_1/struturizr/ui"]
 	path = mini_course_2025/session_1/struturizr/ui
 	url = git@github.com:structurizr/ui.git
+[submodule "mini_course_2025/session_1/hedgedoc"]
+	path = mini_course_2025/session_1/hedgedoc
+	url = https://github.com/hedgedoc/hedgedoc.git
