@@ -1,0 +1,3 @@
+[submodule "mini_course_2025/session_1/struturizr/onpremise"]
+	path = mini_course_2025/session_1/struturizr/onpremise
+	url = git@github.com:structurizr/onpremises.git
