@@ -1,8 +1,8 @@
 [submodule "mini_course_2025/session_1/struturizr/onpremise"]
 	path = mini_course_2025/session_1/struturizr/onpremise
 	url = git@github.com:structurizr/onpremises.git
-[submodule "mini_course_2025/session_1/struturizr/ui"]
-	path = mini_course_2025/session_1/struturizr/ui
+[submodule "mini_course_2025/session_1/struturizr/structurizr-ui"]
+	path = mini_course_2025/session_1/struturizr/structurizr-ui
 	url = git@github.com:structurizr/ui.git
 [submodule "mini_course_2025/session_1/hedgedoc"]
 	path = mini_course_2025/session_1/hedgedoc
