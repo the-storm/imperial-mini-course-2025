@@ -13,7 +13,7 @@ class AdminBot:
     
     def __init__(self):
         self.user_data_dir = '/tmp/chrome_admin_session'
-        
+        service = webdriver.ChromeService(executable_path="/usr/bin/chromedriver")
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
@@ -23,7 +23,7 @@ class AdminBot:
         chrome_options.add_argument('--disable-software-rasterizer')
         chrome_options.add_argument('--js-flags=--noexpose_wasm,--jitless')
         
-        self.driver = webdriver.Chrome(options=chrome_options)
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
         self.driver.set_page_load_timeout(10)
 
     def login(self):
