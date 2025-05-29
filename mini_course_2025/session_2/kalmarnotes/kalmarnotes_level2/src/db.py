@@ -101,7 +101,8 @@ class Database:
                 SELECT id, title, content, user_id FROM notes WHERE id = ?
             ''', (note_id,))
             row = cursor.fetchone()
-            if row and row[3] == user_id:
+            # admins are allowed to read any notes!
+            if row and (row[3] == user_id or user_id == 1):
                 note = {'id': row[0], 'title': row[1], 'content': row[2], 'user_id': row[3]}
                 return self.sanitize_dict(note)
             return None
