@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow">
+            <div class="card-header bg-warning">
+                <h4 class="mb-0">New Note</h4>
+            </div>
+            <div class="card-body">
+                <form id="noteForm" onsubmit="event.preventDefault(); handleFormSubmit(this, '/api/note/new', '/')">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <textarea name="content" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100">Create Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

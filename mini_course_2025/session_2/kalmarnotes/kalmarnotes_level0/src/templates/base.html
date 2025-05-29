@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KalmarNotes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .note-card {
+            transition: transform 0.2s;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        }
+        .note-card:hover {
+            transform: translateY(-5px);
+        }
+        .brand-logo {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #2c3e50 !important;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand brand-logo" href="/">KalmarNotes</a>
+            <div class="navbar-nav">
+                {% if session.user_id %}
+                    <a class="nav-link" href="/note/new">New Note</a>
+                    <a class="nav-link" href="/logout">Logout</a>
+                {% else %}
+                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Common API handling
+        async function handleFormSubmit(form, url, successRedirect) {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    if (successRedirect) window.location.href = successRedirect;
+                } else {
+                    alert(result.error || 'Action failed');
+                }
+            } catch (error) {
+                alert('Network error - please try again');
+            }
+        }
+    </script>
+</body>
+</html>
