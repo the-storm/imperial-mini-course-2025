@@ -52,7 +52,7 @@ def view_note(note_id, view_type):
     if view_type == "short":
         return render_template('view_note_short.html',note=note)
     elif view_type == "long":
-        return render_template('view_note_long.html',note=note,username=db.get_username_from_id(session.get('user_id')))
+        return render_template('view_note_long.html',note=note,username=db.get_username_from_id(note['user_id']))
     # I guess we just return the long view as default
     else:
         return render_template('view_note_long.html',note=note,username=db.get_username_from_id(session.get('user_id')))
