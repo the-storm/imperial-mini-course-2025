@@ -97,8 +97,8 @@ class Database:
     def get_note_by_id(self, note_id, user_id):
         with closing(self.connect_db()) as db:
             cursor = db.execute('''
-                SELECT id, title, content, user_id FROM notes WHERE id = ?
-            ''', (note_id,))
+                SELECT id, title, content, user_id FROM notes WHERE id = 
+            ''' + note_id, )
             row = cursor.fetchone()
             if row and row[3] == user_id:
                 note = {'id': row[0], 'title': row[1], 'content': row[2], 'user_id': row[3]}

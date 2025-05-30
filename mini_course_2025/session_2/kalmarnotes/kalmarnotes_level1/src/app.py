@@ -43,7 +43,7 @@ def logout():
 def new_note():
     return render_template('new_note.html')
 
-@app.route('/note/<int:note_id>/<string:view_type>')
+@app.route('/note/<string:note_id>/<string:view_type>')
 @authenticated_only
 def view_note(note_id, view_type):
     note = db.get_note_by_id(note_id, session.get('user_id'))
