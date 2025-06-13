@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  pysa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7006:2121"
