@@ -8,5 +8,8 @@
 	path = mini_course_2025/session_1/structurizr/structurizr-ui
 	url = git@github.com:structurizr/ui.git
 [submodule "mini_course_2025/mini_course_2025/session_3/Pysa/pyre-check"]
-	path = mini_course_2025/mini_course_2025/session_3/Pysa/pyre-check
+	path = mini_course_2025/session_3/Pysa/pyre-check
 	url = https://github.com/the-storm/pyre-check.git
+[submodule "mini_course_2025/session_4/Fuzzing-Module"]
+	path = mini_course_2025/session_4/Fuzzing-Module
+	url = https://github.com/the-storm/Fuzzing-Module.git
